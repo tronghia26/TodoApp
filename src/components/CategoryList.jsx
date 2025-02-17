@@ -1,11 +1,5 @@
 import "./CategoryList.css";
-
-const CATEGORY_ITEMS = [
-  { id: "personal", label: "Personal" },
-  { id: "company", label: "Company" },
-  { id: "travel", label: "Travel" },
-  { id: "idea", label: "Idea" },
-];
+import { CATEGORY_ITEMS } from "../constant";
 
 const CategoryList = () => {
   return (

@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import "./FilterList.css";
+import { FILTER_ITEMS } from "../constant";
 
 const FilterList = ({
-  FILTER_ITEMS,
   selectedFilterId,
   setSelectedFilterId,
   countByFilterType,

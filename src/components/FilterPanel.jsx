@@ -3,29 +3,7 @@ import "./FilterPanel.css";
 import PropTypes from "prop-types";
 import CategoryList from "./CategoryList";
 import FilterList from "./FilterList";
-
-const FILTER_ITEMS = [
-  {
-    id: "all",
-    label: "ALL",
-    iconPath: "/inbox.png",
-  },
-  {
-    id: "important",
-    label: "Important",
-    iconPath: "/flag.png",
-  },
-  {
-    id: "completed",
-    label: "Completed",
-    iconPath: "/check.png",
-  },
-  {
-    id: "delete",
-    label: "Delete",
-    iconPath: "/delete.png",
-  },
-];
+import { FILTER_ITEMS } from "../constant";
 
 const FilterPanel = ({
   selectedFilterId,
