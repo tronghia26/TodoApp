@@ -1,12 +1,10 @@
 import PropTypes from "prop-types";
 import "./FilterList.css";
 import { FILTER_ITEMS } from "../constant";
+import { useAppContext } from "../context/AppProvider";
 
-const FilterList = ({
-  selectedFilterId,
-  setSelectedFilterId,
-  countByFilterType,
-}) => {
+const FilterList = ({ countByFilterType }) => {
+  const { selectedFilterId, setSelectedFilterId } = useAppContext();
   return (
     <div className="filter-container">
       {FILTER_ITEMS.map((filterItem) => {
@@ -32,8 +30,6 @@ const FilterList = ({
 
 FilterList.propTypes = {
   FILTER_ITEMS: PropTypes.object.isRequired,
-  selectedFilterId: PropTypes.string.isRequired,
-  setSelectedFilterId: PropTypes.func.isRequired,
   countByFilterType: PropTypes.func.isRequired,
 };
 

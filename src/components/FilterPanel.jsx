@@ -4,15 +4,10 @@ import PropTypes from "prop-types";
 import CategoryList from "./CategoryList";
 import FilterList from "./FilterList";
 import { FILTER_ITEMS } from "../constant";
+import { useAppContext } from "../context/AppProvider";
 
-const FilterPanel = ({
-  selectedFilterId,
-  setSelectedFilterId,
-  searchText,
-  setSearchText,
-  todoList,
-}) => {
-  // const [selectedFilterId, setSelectedFilterId] = useState("all");
+const FilterPanel = () => {
+  const { todoList, searchText, setSearchText } = useAppContext();
 
   const countByFilterType = useMemo(() => {
     return todoList.reduce(
@@ -44,8 +39,6 @@ const FilterPanel = ({
       />
       <FilterList
         FILTER_ITEMS={FILTER_ITEMS}
-        selectedFilterId={selectedFilterId}
-        setSelectedFilterId={setSelectedFilterId}
         countByFilterType={countByFilterType}
       />
       <CategoryList />
@@ -54,11 +47,7 @@ const FilterPanel = ({
 };
 
 FilterPanel.propTypes = {
-  selectedFilterId: PropTypes.string.isRequired,
-  setSelectedFilterId: PropTypes.func.isRequired,
   todoList: PropTypes.array.isRequired,
-  searchText: PropTypes.string.isRequired,
-  setSearchText: PropTypes.func.isRequired,
 };
 
 export default FilterPanel;

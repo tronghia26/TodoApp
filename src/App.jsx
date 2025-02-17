@@ -1,41 +1,22 @@
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import "./App.css";
 import TodoItem from "./components/TodoItem";
 import Sidebar from "./components/Sidebar";
 import FilterPanel from "./components/FilterPanel";
+import { useAppContext } from "./context/AppProvider";
 
 function App() {
-  const [todoList, setTodoList] = useState([
-    {
-      id: 1,
-      name: "Tôi học thêm",
-      isImportant: false,
-      isCompleted: false,
-      isDeleted: false,
-      category: "personal",
-    },
-    {
-      id: 2,
-      name: "Tôi học toán",
-      isImportant: true,
-      isCompleted: true,
-      isDeleted: false,
-      category: "personal",
-    },
-    {
-      id: 3,
-      name: "Tôi học nhạc",
-      isImportant: false,
-      isCompleted: false,
-      isDeleted: false,
-      category: "personal",
-    },
-  ]);
-
-  const [selectedFilterId, setSelectedFilterId] = useState("all");
-  const [showSidebar, setShowSidebar] = useState(false);
-  const [activeTodoItemId, setActiveTodoItemId] = useState();
-  const [searchText, setSearchText] = useState("");
+  const {
+    selectedCategoryId,
+    todoList,
+    setTodoList,
+    selectedFilterId,
+    showSidebar,
+    setShowSidebar,
+    activeTodoItemId,
+    setActiveTodoItemId,
+    searchText,
+  } = useAppContext();
 
   const activeTodoItem = todoList.find((todo) => {
     return todo.id === activeTodoItemId;
@@ -73,6 +54,9 @@ function App() {
       if (!todo.name.includes(searchText)) {
         return false;
       }
+      if (selectedCategoryId && selectedCategoryId !== todo.category) {
+        return false;
+      }
       switch (selectedFilterId) {
         case "all":
           return true;
@@ -86,17 +70,11 @@ function App() {
           return true;
       }
     });
-  }, [todoList, selectedFilterId, searchText]);
+  }, [todoList, selectedFilterId, searchText, selectedCategoryId]);
 
   return (
     <div className="container">
-      <FilterPanel
-        selectedFilterId={selectedFilterId}
-        setSelectedFilterId={setSelectedFilterId}
-        searchText={searchText}
-        setSearchText={setSearchText}
-        todoList={todoList}
-      />
+      <FilterPanel />
       <div className="main-content">
         <input
           ref={inputRef}

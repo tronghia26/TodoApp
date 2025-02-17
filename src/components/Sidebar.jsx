@@ -28,7 +28,6 @@ const Sidebar = (props) => {
             type="text"
             value={name}
             onChange={(e) => {
-              //   props.handleTodoNameChange(data.id, e.target.value);
               setName(e.target.value);
             }}
             readOnly
